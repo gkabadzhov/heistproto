@@ -14,6 +14,6 @@ script = ExtResource("1_tfged")
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("1_he6t3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" groups=["NPC"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 scale = Vector2(0.84, 0.84)
 shape = SubResource("CircleShape2D_vm4ot")
