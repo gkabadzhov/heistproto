@@ -19,5 +19,5 @@ func _on_body_exited(body):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

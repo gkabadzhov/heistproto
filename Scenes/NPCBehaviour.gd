@@ -16,20 +16,22 @@ var state: State = State.WALKING
 @onready var timer = Timer.new()
 
 func _ready():
-	_initialize_room_targets()
-	timer.wait_time = 5.0 #Time spent in each room
-	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
-	add_child(timer)
-	_move_to_next_room()
+	#_initialize_room_targets()
+	#timer.wait_time = 5.0 #Time spent in each room
+	#timer.connect("timeout", Callable(self, "_on_timer_timeout"))
+	#add_child(timer)
+	#_move_to_next_room()
+	pass
 	
-func _process(delta: float) -> void:
-	if current_target_position != Vector2.ZERO:
-		var direction = (current_target_position - global_position).normalized()
-		global_position += direction * speed * delta
-		
-		if global_position.distance_to(current_target_position) < 10:
-			current_target_position = Vector2.ZERO
-			timer.start()
+func _process(_delta: float) -> void:
+	#if current_target_position != Vector2.ZERO:
+		#var direction = (current_target_position - global_position).normalized()
+		#global_position += direction * speed * delta
+		#
+		#if global_position.distance_to(current_target_position) < 10:
+			#current_target_position = Vector2.ZERO
+			#timer.start()
+	pass
 
 func on_timeout() -> void:
 	state = State.WALKING

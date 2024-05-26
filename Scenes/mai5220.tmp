@@ -6255,8 +6255,9 @@ script = ExtResource("3_c1upy")
 curve = SubResource("Curve2D_e8b3e")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="player/Path2D"]
-position = Vector2(10, -4)
-rotation = -1.54781
+position = Vector2(24.9339, -91.4128)
+rotation = -0.0319041
+progress = 100.0
 loop = false
 
 [node name="Sprite2D" type="Sprite2D" parent="player/Path2D/PathFollow2D"]
