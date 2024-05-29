@@ -7,7 +7,7 @@ extends Node2D
 @export var speed = 100
 @export var wait_time: float = 2.0
 
-var _is_moving: bool = true
+var _is_moving: bool = false
 var _target_progress: float = 0.0
 var _timer: Timer
 var path_points : Array = []
