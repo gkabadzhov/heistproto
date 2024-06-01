@@ -5,6 +5,14 @@ var path_index = 0
 var speed = 100.0 #pixels per second
 var dragging = false
 var following = false
+var wait_time = 2.0 #seconds to wait at a section, TODO: make it an action variable
+
+func ready():
+	var timer = Timer.new()
+	timer.wait_time = wait_time
+	timer.one_shot = true
+	timer.timeout.connect(_on_Timer_timeout)
+	add_child(timer) 
 
 func input(event):
 	if event is InputEventMouseButton:
@@ -31,6 +39,10 @@ func follow_path(delta):
 		if path_index >= path.size():
 			path.clear()
 			following = false
+		elif path_index % 10 == 0: #Adjust logic for proper behaviour
+			pass
+			#following = false
+			#get_node("timer").start() 
 	else:
 		position += direction * distance
 
@@ -38,6 +50,8 @@ func start_following():
 	following = true
 	print("Character started following the path: ", path)
 	
+func _on_Timer_timeout():
+	following = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not dragging and following:
