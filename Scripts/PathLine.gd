@@ -46,7 +46,7 @@ func continue_drawing(current_position):
 		
 func start_character_movement():
 	if all_points.size() > 0:
-		print("Starting character movement with points: ", all_points)
+		#print("Starting character movement with points: ", all_points)
 		$Character.path = all_points.duplicate()
 		$Character.wait_points = wait_points.duplicate()
 		$Character.path_index = 0
