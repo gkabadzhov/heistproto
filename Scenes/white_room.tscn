@@ -22,5 +22,6 @@ points = PackedVector2Array(10, 2)
 script = ExtResource("3_6v620")
 
 [node name="Character" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_240iw")
 script = ExtResource("3_n5cda")

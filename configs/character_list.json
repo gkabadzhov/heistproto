@@ -4,20 +4,23 @@
 		"role": "Tank",
 		"speed": 100,
 		"heart": 50,
-		"brains": 50
+		"brains": 50,
+		"texture_path": "res://Assets/Red.png"
 	},
 	{
 		"name": "Sorcerer",
 		"role": "Caster",
 		"speed": 200,
 		"heart": 50,
-		"brains": 50
+		"brains": 50,
+		"texture_path": "res://Assets/Yellow.png"
 	},
 	{
 		"name": "Priest",
 		"role": "Healer",
 		"speed": 50,
 		"heart": 50,
-		"brains": 50
+		"brains": 50,
+		"texture_path": "res://Assets/Blue.png"
 	}
 ]

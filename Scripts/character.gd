@@ -3,10 +3,15 @@ extends Sprite2D
 var path = []
 var wait_points = []
 var path_index = 0
-var speed = 100.0 #pixels per second
 var dragging = false
 var following = false
 var wait_time = 2.0 #seconds to wait at a section, TODO: make it an action variable
+
+var characterName = ""
+var role = ""
+var speed = 0 #pixels per second
+var heart = 0
+var brains = 0
 
 func _ready():
 	var timer = Timer.new()
@@ -14,7 +19,14 @@ func _ready():
 	timer.wait_time = wait_time
 	timer.one_shot = true
 	timer.connect( "timeout", Callable(self, "_on_Timer_timeout"))
-	add_child(timer) 
+	add_child(timer)
+	
+	print("Character ready: %s, Role: %s, Speed: %d, Heart: %d, Brains: %d" % [characterName, role, speed, heart, brains])
+
+func set_texture_from_path(texture_path: String): 
+	var texture = load(texture_path)
+	if texture:
+		self.texture = texture
 
 #TODO: currently broken function for dragging the character icon. Add "_" at the start of func name to activate
 func input(event):
