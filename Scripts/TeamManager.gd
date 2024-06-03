@@ -6,6 +6,8 @@ var max_team_size = 3
 var config_path = "res://configs/character_list.json"
 @export var character_scene_path = "res://Scenes/Character.tscn"
 
+var active_character = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	load_characters_from_config()
@@ -36,8 +38,17 @@ func select_character(character_name):
 		print("Selected character: ", character_name.name)
 	else: 
 		print("Cannot select character: ", character_name)
-		
-		
+
+func set_active_character_by_index(index):
+	if index >= 0 and index < active_team.size():
+		var character_data = active_team[index]
+		for character_node in get_children():
+			if character_node is Sprite2D and character_node.characterName == character_data["name"]:
+				active_character = character_node
+				print("Active character: ", active_character.characterName)
+				return
+	print("Invalid character index: ", index)
+
 func create_character_node(character_data):
 	var character_scene = load(character_scene_path)
 	var character_instance = character_scene.instantiate()
@@ -70,5 +81,11 @@ func _input(event):
 				select_character(characters[4])
 			elif event.keycode == KEY_6:
 				select_character(characters[5])
+			elif event.keycode == KEY_Q:
+				set_active_character_by_index(0)
+			elif event.keycode == KEY_W:
+				set_active_character_by_index(1)
+			elif event.keycode == KEY_E:
+				set_active_character_by_index(2)
 			elif event.keycode == KEY_ENTER:
 				print("Active Team: ", active_team)

@@ -24,9 +24,9 @@ func _ready():
 	print("Character ready: %s, Role: %s, Speed: %d, Heart: %d, Brains: %d" % [characterName, role, speed, heart, brains])
 
 func set_texture_from_path(texture_path: String): 
-	var texture = load(texture_path)
-	if texture:
-		self.texture = texture
+	var loadTexture = load(texture_path)
+	if loadTexture:
+		self.texture = loadTexture
 
 #TODO: currently broken function for dragging the character icon. Add "_" at the start of func name to activate
 func input(event):
