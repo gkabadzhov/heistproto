@@ -1,32 +1,37 @@
 extends Node2D
 
-var possible_characters = ["Warrior", "Mage", "Archer", "Rogue", "Healer", "Knight", "Sorcerer", "Assassin", "Paladin", "Druid"]
 var characters = []
 var active_team = []
 var max_team_size = 3
+var config_path = "res://configs/character_list.json"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	generate_characters()
+	load_characters_from_config()
 	print("Generated characters: ", characters)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
-func generate_characters():
-	characters.clear()
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	while characters.size() < 10:
-		var character = possible_characters[rng.randi_range(0, possible_characters.size() - 1)]
-		if character not in characters:
-			characters.append(character)
+func load_characters_from_config():
+	var file = FileAccess.open(config_path, FileAccess.READ)
+	if file: 
+		var data = file.get_as_text()
+		
+		# Is below supposed to work? Kinda sus. TODO: check later
+		var parsed = JSON.parse_string(data)
+		characters = parsed
+		
+		file.close()
+	else:
+		print("Failed to load character list config")
+	
 
 func select_character(character_name):
 	if character_name in characters and character_name not in active_team and active_team.size() < max_team_size:
 		active_team.append(character_name)
-		print("Selected character: ", character_name)
+		print("Selected character: ", character_name.name)
 	else: 
 		print("Cannot select character: ", character_name)
 		

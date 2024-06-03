@@ -1,0 +1,23 @@
+[
+	{
+		"name": "Warrior",
+		"role": "Tank",
+		"speed": 100,
+		"heart": 50,
+		"brains": 50
+	},
+	{
+		"name": "Sorcerer",
+		"role": "Caster",
+		"speed": 200,
+		"heart": 50,
+		"brains": 50
+	},
+	{
+		"name": "Priest",
+		"role": "Healer",
+		"speed": 50,
+		"heart": 50,
+		"brains": 50
+	}
+]
