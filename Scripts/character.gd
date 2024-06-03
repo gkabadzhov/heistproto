@@ -1,18 +1,21 @@
 extends Sprite2D
 
 var path = []
+var wait_points = []
 var path_index = 0
 var speed = 100.0 #pixels per second
 var dragging = false
 var following = false
 var wait_time = 2.0 #seconds to wait at a section, TODO: make it an action variable
 
-func ready():
+func _ready():
 	var timer = Timer.new()
+	timer.name = "PathTimer"
 	timer.wait_time = wait_time
 	timer.one_shot = true
-	timer.timeout.connect(_on_Timer_timeout)
+	timer.connect( "timeout", Callable(self, "_on_Timer_timeout"))
 	add_child(timer) 
+
 
 func input(event):
 	if event is InputEventMouseButton:
@@ -39,10 +42,12 @@ func follow_path(delta):
 		if path_index >= path.size():
 			path.clear()
 			following = false
-		elif path_index % 10 == 0: #Adjust logic for proper behaviour
-			pass
-			#following = false
-			#get_node("timer").start() 
+		elif position in wait_points:
+			following = false
+			get_node("PathTimer").start()
+			#TODO: implement logic to execute an action 
+			#      and react base on success rather than waiting for a timer
+			 
 	else:
 		position += direction * distance
 

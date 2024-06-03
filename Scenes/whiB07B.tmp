@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtp210cnoeupt"]
+
+[ext_resource type="Script" path="res://Scripts/PathLine.gd" id="1_f8bkr"]
+[ext_resource type="Texture2D" uid="uid://51bbusb3u6eh" path="res://icon.svg" id="2_240iw"]
+[ext_resource type="Script" path="res://Scripts/character.gd" id="3_n5cda"]
+[ext_resource type="Texture2D" uid="uid://7xqep5m2ynp" path="res://Assets/68362641-apartment-floor-plan-blueprint-top-view-basic-room-of-home-vector-illustration.jpg" id="4_2jh0x"]
+
+[node name="White Room" type="Node2D"]
+script = ExtResource("1_f8bkr")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(589.5, 382)
+scale = Vector2(0.879231, 0.536923)
+texture = ExtResource("4_2jh0x")
+
+[node name="PathLine" type="Line2D" parent="."]
+points = PackedVector2Array(10, 2)
+
+[node name="Character" type="Sprite2D" parent="."]
+texture = ExtResource("2_240iw")
+script = ExtResource("3_n5cda")
+
+[node name="PathTimer" type="Timer" parent="Character"]
