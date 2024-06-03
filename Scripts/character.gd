@@ -16,7 +16,7 @@ func _ready():
 	timer.connect( "timeout", Callable(self, "_on_Timer_timeout"))
 	add_child(timer) 
 
-
+#TODO: currently broken function for dragging the character icon. Add "_" at the start of func name to activate
 func input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
