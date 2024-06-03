@@ -33,7 +33,7 @@ func load_characters_from_config():
 
 func select_character(character_name):
 	if character_name in characters and character_name not in active_team and active_team.size() < max_team_size:
-		active_team.append(character_name)
+		
 		create_character_node(character_name)
 		print("Selected character: ", character_name.name)
 	else: 
@@ -43,11 +43,15 @@ func set_active_character_by_index(index):
 	if index >= 0 and index < active_team.size():
 		var character_data = active_team[index]
 		for character_node in get_children():
-			if character_node is Sprite2D and character_node.characterName == character_data["name"]:
+			print(character_node.characterName, character_data.characterName)
+			if character_node is Sprite2D and character_node.characterName == character_data.characterName:
 				active_character = character_node
 				print("Active character: ", active_character.characterName)
 				return
 	print("Invalid character index: ", index)
+
+func get_active_character():
+	return active_character
 
 func create_character_node(character_data):
 	var character_scene = load(character_scene_path)
@@ -61,6 +65,7 @@ func create_character_node(character_data):
 	character_instance.brains = character_data["brains"]
 	character_instance.set_texture_from_path(character_data["texture_path"])
 	
+	active_team.append(character_instance)
 	add_child(character_instance)
 	
 func get_active_team():

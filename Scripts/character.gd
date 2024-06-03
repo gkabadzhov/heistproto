@@ -65,7 +65,7 @@ func follow_path(delta):
 
 func start_following():
 	following = true
-	print("Character started following the path: ", path)
+	#print("Character started following the path: ", path)
 	
 func _on_Timer_timeout():
 	following = true
