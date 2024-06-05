@@ -47,6 +47,7 @@ func set_active_character_by_index(index):
 			if character_node is Sprite2D and character_node.characterName == character_data.characterName:
 				active_character = character_node
 				print("Active character: ", active_character.characterName)
+				#$ActivePlayerLabel.text = str(active_character.characterName)
 				return
 	print("Invalid character index: ", index)
 
