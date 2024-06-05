@@ -7,6 +7,7 @@ var config_path = "res://configs/character_list.json"
 @export var character_scene_path = "res://Scenes/Character.tscn"
 
 var active_character = null
+@onready var game_manager = $/root/WhiteRoom/GameManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +37,7 @@ func select_character(character_name):
 		
 		create_character_node(character_name)
 		print("Selected character: ", character_name.name)
+		game_manager.update_game_state()
 	else: 
 		print("Cannot select character: ", character_name)
 

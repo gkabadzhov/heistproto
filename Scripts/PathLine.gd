@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var team_manager = $TeamManager
+@onready var game_manager = $GameManager
 
 @export var line_width: float = 2.0
 @export var line_color: Color = Color(1, 0, 0)
@@ -12,8 +13,7 @@ var active_character = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
+	game_manager.update_game_state()
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -30,6 +30,7 @@ func _input(event):
 		if event.pressed and event.keycode == KEY_SPACE:
 			#start_character_movement()
 			move_all_characters()
+			game_manager.start_execution()
 		
 
 func start_drawing(current_position):
@@ -57,7 +58,7 @@ func continue_drawing(current_position):
 func start_character_movement():
 	if all_points.size() > 0:
 		#print("Starting character movement with points: ", all_points)
-		var active_character = team_manager.get_active_character()
+		active_character = team_manager.get_active_character()
 		
 		active_character.path = all_points.duplicate()
 		active_character.wait_points = wait_points.duplicate()
