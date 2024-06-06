@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtp210cnoeupt"]
+[gd_scene load_steps=6 format=3 uid="uid://dtp210cnoeupt"]
 
 [ext_resource type="Script" path="res://Scripts/PathLine.gd" id="1_f8bkr"]
 [ext_resource type="Script" path="res://Scripts/TeamManager.gd" id="3_6v620"]
 [ext_resource type="Texture2D" uid="uid://7xqep5m2ynp" path="res://Assets/68362641-apartment-floor-plan-blueprint-top-view-basic-room-of-home-vector-illustration.jpg" id="4_2jh0x"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="4_nbpn5"]
+[ext_resource type="Script" path="res://Scripts/ConfrontationOverlay.gd" id="5_csrn1"]
 
 [node name="WhiteRoom" type="Node2D"]
 script = ExtResource("1_f8bkr")
@@ -23,8 +24,15 @@ script = ExtResource("3_6v620")
 [node name="PathLine" type="Line2D" parent="GameManager"]
 points = PackedVector2Array(10, 2)
 
-[node name="ActivePlayerLabel" type="Label" parent="."]
-offset_left = 873.0
-offset_top = 43.0
-offset_right = 1141.0
-offset_bottom = 90.0
+[node name="ConfrontationOverlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_csrn1")
+
+[node name="ColorRect" type="ColorRect" parent="ConfrontationOverlay"]
+layout_mode = 0
+offset_right = 1163.0
+offset_bottom = 730.0
+color = Color(0.629675, 0.629675, 0.629675, 1)
