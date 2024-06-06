@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var team_manager = $TeamManager
-@onready var game_manager = $GameManager
+@onready var team_manager: Node = null
+@onready var game_manager: Node = null
 
 @export var line_width: float = 2.0
 @export var line_color: Color = Color(1, 0, 0)
@@ -13,6 +13,8 @@ var active_character = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	team_manager = get_node("/root/WhiteRoom/GameManager/TeamManager")
+	game_manager = get_node("/root/WhiteRoom/GameManager")
 	game_manager.update_game_state()
 
 func _input(event):
@@ -42,17 +44,19 @@ func start_drawing(current_position):
 	new_line.default_color = line_color
 	new_line.add_point(to_local(current_position))
 	lines.append(new_line)
+	all_points.append(to_local(current_position))
 	active_character.path.append(to_local(current_position))
 	
 func stop_drawing():
 	is_drawing = false
 	if not all_points.is_empty():
-		active_character.wait_points.append(all_points[-1])
+		wait_points.append(all_points[-1])
 	
 func continue_drawing(current_position):
 	if is_drawing:
 		var local_position = to_local(current_position)
 		lines[-1].add_point(local_position)
+		all_points.append(to_local(current_position))
 		active_character.path.append(local_position)
 		
 func start_character_movement():
@@ -61,7 +65,7 @@ func start_character_movement():
 		active_character = team_manager.get_active_character()
 		
 		active_character.path = all_points.duplicate()
-		active_character.wait_points = wait_points.duplicate()
+
 		active_character.path_index = 0
 		active_character.start_following()
 
@@ -69,5 +73,6 @@ func move_all_characters():
 	var characters = team_manager.get_active_team()
 	
 	for character in characters:
+		character.wait_points = wait_points.duplicate()
 		character.path_index = 0
 		character.start_following()

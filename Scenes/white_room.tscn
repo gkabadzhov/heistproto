@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/PathLine.gd" id="1_f8bkr"]
 [ext_resource type="Script" path="res://Scripts/TeamManager.gd" id="3_6v620"]
 [ext_resource type="Texture2D" uid="uid://7xqep5m2ynp" path="res://Assets/68362641-apartment-floor-plan-blueprint-top-view-basic-room-of-home-vector-illustration.jpg" id="4_2jh0x"]
-[ext_resource type="Script" path="res://Scenes/GameManager.gd" id="4_nbpn5"]
+[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="4_nbpn5"]
 
 [node name="WhiteRoom" type="Node2D"]
 script = ExtResource("1_f8bkr")
@@ -14,14 +14,14 @@ position = Vector2(589.5, 382)
 scale = Vector2(0.879231, 0.536923)
 texture = ExtResource("4_2jh0x")
 
-[node name="PathLine" type="Line2D" parent="."]
-points = PackedVector2Array(10, 2)
-
-[node name="TeamManager" type="Node2D" parent="."]
-script = ExtResource("3_6v620")
-
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("4_nbpn5")
+
+[node name="TeamManager" type="Node2D" parent="GameManager"]
+script = ExtResource("3_6v620")
+
+[node name="PathLine" type="Line2D" parent="GameManager"]
+points = PackedVector2Array(10, 2)
 
 [node name="ActivePlayerLabel" type="Label" parent="."]
 offset_left = 873.0

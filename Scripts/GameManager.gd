@@ -4,7 +4,7 @@ enum GameState {RECRUITING, PLANNING, EXECUTION}
 var current_state = GameState.RECRUITING
 
 @export var max_team_size: int = 3
-@onready var team_manager = $/root/WhiteRoom/TeamManager
+@onready var team_manager = $TeamManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
