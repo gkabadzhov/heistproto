@@ -8,11 +8,17 @@ extends Control
 @onready var panel2: Panel = $Panel2
 @onready var panel3: Panel = $Panel3
 @onready var display_timer: Timer = $Timer
+
+signal button_pressed
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide_all_panels()
 	display_timer.wait_time = 1.0
 	display_timer.connect("timeout", Callable(self, "_on_DisplayTimer_timeout"))
+	$Panel3/Option1.connect("pressed", Callable(self, "_on_Button_Pressed"))
+	$Panel3/Option2.connect("pressed", Callable(self, "_on_Button_Pressed"))
+	$Panel3/Option3.connect("pressed", Callable(self, "_on_Button_Pressed"))
 
 func show_overlay():
 	visible = true
@@ -43,6 +49,6 @@ func _on_DisplayTimer_timeout():
 	else:
 		display_timer.stop()
 		
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func _on_Button_Pressed():
+	print("Button pressed in UIOverlay")
+	emit_signal("button_pressed")

@@ -34,7 +34,7 @@ func set_texture_from_path(texture_path: String):
 		self.texture = loadTexture
 
 func follow_path(delta):
-	if path.is_empty() or not following or is_paused:
+	if path.is_empty() or not following:
 		return
 		
 	var target = path[path_index]
@@ -68,8 +68,9 @@ func unpause():
 	is_paused = false
 	
 func _on_Timer_timeout():
-	following = true
-	game_manager.end_confrontation()
+	pass
+	#following = true
+	#game_manager.end_confrontation()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not dragging and following:

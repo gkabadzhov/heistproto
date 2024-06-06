@@ -81,7 +81,11 @@ func pause_all_characters():
 func unpause_all_characters():
 	for character in active_team:
 		character.unpause()
-	
+
+func notify_active_character_to_continue():
+	if active_character:
+		active_character.following = true	
+
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:

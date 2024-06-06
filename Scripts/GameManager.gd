@@ -11,6 +11,7 @@ var current_state = GameState.RECRUITING
 func _ready():
 	team_manager = $TeamManager
 	ui_overlay = get_node("/root/WhiteRoom/UIOverlay")
+	ui_overlay.connect("button_pressed", Callable(self, "_on_button_pressed"))
 	update_game_state()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,3 +42,9 @@ func end_confrontation():
 	team_manager.unpause_all_characters()
 	#get_tree().paused = false
 	print("current Game State is: ", current_state)
+
+func _on_button_pressed():
+	print("Button pressed in GameManager")
+	end_confrontation()
+	team_manager.notify_active_character_to_continue()
+	#team_manager.notify_active_character_to_continue()
