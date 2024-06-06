@@ -1,6 +1,6 @@
 extends Node2D
 
-enum GameState {RECRUITING, PLANNING, EXECUTION}
+enum GameState {RECRUITING, PLANNING, EXECUTION, CONFRONTATION}
 var current_state = GameState.RECRUITING
 
 @export var max_team_size: int = 3
@@ -25,3 +25,15 @@ func update_game_state():
 func start_execution():
 	current_state = GameState.EXECUTION
 	print("Current Game State is: ", current_state)
+	
+func start_confrontation():
+	current_state = GameState.CONFRONTATION
+	team_manager.pause_all_characters()
+	#get_tree().paused = true
+	print("Current Game State is: ", current_state)
+
+func end_confrontation():
+	current_state = GameState.EXECUTION
+	team_manager.unpause_all_characters()
+	#get_tree().paused = false
+	print("current Game State is: ", current_state)

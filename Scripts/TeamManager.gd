@@ -74,6 +74,14 @@ func create_character_node(character_data):
 func get_active_team():
 	return active_team
 	
+func pause_all_characters():
+	for character in active_team:
+		character.pause()
+		
+func unpause_all_characters():
+	for character in active_team:
+		character.unpause()
+	
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
@@ -96,4 +104,5 @@ func _input(event):
 			elif event.keycode == KEY_E:
 				set_active_character_by_index(2)
 			elif event.keycode == KEY_ENTER:
-				print("Active Team: ", active_team)
+				game_manager.end_confrontation()
+

@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var team_manager: Node = null
-@onready var game_manager: Node = null
+@onready var team_manager: Node2D = null
+@onready var game_manager: Node2D = null
 
 @export var line_width: float = 2.0
 @export var line_color: Color = Color(1, 0, 0)

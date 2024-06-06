@@ -6,6 +6,7 @@ var path_index = 0
 var dragging = false
 var following = false
 var wait_time = 2.0 #seconds to wait at a section, TODO: make it an action variable
+var is_paused = false
 
 var characterName = ""
 var role = ""
@@ -13,7 +14,11 @@ var speed = 0 #pixels per second
 var heart = 0
 var brains = 0
 
+@onready var game_manager: Node2D = null
+
 func _ready():
+	game_manager = get_node("/root/WhiteRoom/GameManager")
+	
 	var timer = Timer.new()
 	timer.name = "PathTimer"
 	timer.wait_time = wait_time
@@ -28,20 +33,8 @@ func set_texture_from_path(texture_path: String):
 	if loadTexture:
 		self.texture = loadTexture
 
-#TODO: currently broken function for dragging the character icon. Add "_" at the start of func name to activate
-func input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed and is_inside_tree() and get_rect().has_point(to_local(event.position)):
-				dragging = true
-			else:
-				dragging = false
-				
-	if event is InputEventMouseMotion and dragging:
-		global_position = event.position
-
 func follow_path(delta):
-	if path.is_empty() or not following:
+	if path.is_empty() or not following or is_paused:
 		return
 		
 	var target = path[path_index]
@@ -56,7 +49,9 @@ func follow_path(delta):
 			following = false
 		elif position in wait_points:
 			following = false
+			game_manager.start_confrontation()
 			get_node("PathTimer").start()
+
 			#TODO: implement logic to execute an action 
 			#      and react base on success rather than waiting for a timer
 			 
@@ -67,8 +62,14 @@ func start_following():
 	following = true
 	#print("Character started following the path: ", path)
 	
+func pause():
+	is_paused = true
+func unpause():
+	is_paused = false
+	
 func _on_Timer_timeout():
 	following = true
+	game_manager.end_confrontation()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not dragging and following:
