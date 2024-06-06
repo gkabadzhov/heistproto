@@ -5,7 +5,7 @@ var wait_points = []
 var path_index = 0
 var dragging = false
 var following = false
-var wait_time = 2.0 #seconds to wait at a section, TODO: make it an action variable
+var wait_time = 5.0 #seconds to wait at a section, TODO: make it an action variable
 var is_paused = false
 
 var characterName = ""
