@@ -18,15 +18,16 @@ func _ready():
 	game_manager.update_game_state()
 
 func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				start_drawing(event.position)
-			else:
-				stop_drawing()
-	
-	if event is InputEventMouseMotion and is_drawing:
-		continue_drawing(event.position)
+	if game_manager.current_state == game_manager.GameState.PLANNING:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					start_drawing(event.position)
+				else:
+					stop_drawing()
+		
+		if event is InputEventMouseMotion and is_drawing:
+			continue_drawing(event.position)
 
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
