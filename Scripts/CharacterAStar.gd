@@ -7,14 +7,17 @@ var current_path_index = 0
 var tile_size
 var pathfinding
 
+@export var start : Vector2
+@export var goal : Vector2
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pathfinding = get_parent()
 	tile_size = pathfinding.TILE_SIZE
 	
 	#For some bullshit reason i can't bother to fix - we pass the Y first, the X second
-	var start = Vector2(0,0)
-	var goal = Vector2(2,9)
+	#var start = Vector2(0,0)
+	#var goal = Vector2(2,9)
 	
 	path = pathfinding.find_path(start, goal)
 	current_path_index = 0
