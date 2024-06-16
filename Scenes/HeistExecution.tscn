@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://362cdpdaerke"]
+
+[ext_resource type="PackedScene" uid="uid://b4xq7o08i3qu" path="res://Scenes/AStar/pathfinding.tscn" id="1_lrxc0"]
+[ext_resource type="PackedScene" uid="uid://dwv7dv8qyaa0p" path="res://Scenes/AStar/Character.tscn" id="2_lr27x"]
+
+[node name="SplitScreen" type="Node2D"]
+
+[node name="Pathfinding" parent="." instance=ExtResource("1_lrxc0")]
+
+[node name="Character" parent="Pathfinding" instance=ExtResource("2_lr27x")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 62)
+zoom = Vector2(2, 2)

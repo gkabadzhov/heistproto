@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs0awn2qf575b"]
-
-[ext_resource type="Script" path="res://Scripts/character.gd" id="1_uttwd"]
-
-[node name="Character" type="Sprite2D"]
-scale = Vector2(5, 5)
-script = ExtResource("1_uttwd")
