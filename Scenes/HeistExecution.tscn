@@ -9,6 +9,4 @@
 
 [node name="Character" parent="Pathfinding" instance=ExtResource("2_lr27x")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 62)
-zoom = Vector2(2, 2)
+[node name="SubViewport" type="SubViewport" parent="."]

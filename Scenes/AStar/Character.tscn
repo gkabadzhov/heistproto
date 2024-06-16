@@ -8,3 +8,7 @@ script = ExtResource("1_bunyg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_x6g8g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(8, 8)
+limit_smoothed = true

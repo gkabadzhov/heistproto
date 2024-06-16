@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed = 100
+var speed = 40
 
 var path = []
 var current_path_index = 0
