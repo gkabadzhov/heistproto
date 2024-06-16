@@ -8,17 +8,17 @@ const GRID_HEIGHT = 10
 var path = []
 
 var grid = [
-		[0,1,0,0,0,0,0,0,0,0],
+		[1,1,0,0,0,0,0,0,0,0],
 		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
-		[0,1,1,1,1,1,1,1,1,0],
+		[0,0,0,0,0,0,0,0,1,0],
 		[0,1,1,1,1,1,1,1,1,0],
 		[0,1,0,0,0,0,0,0,0,0],
+		[0,1,0,0,0,0,0,0,0,0],
+		[0,1,0,0,0,0,0,0,0,0],
+		[0,1,1,1,1,1,1,1,1,0],
+		[0,0,0,0,0,0,0,0,1,0],
+		[0,1,1,1,1,1,1,1,1,0],
+		[0,1,0,0,0,0,0,0,0,0]
 	]
 
 #Directions for moving through the grid (diagonales included)
@@ -66,6 +66,7 @@ func find_path(start, goal):
 				g_score[neighbour] = tentative_g_score
 				f_score[neighbour] = g_score[neighbour] + heurestic(neighbour, goal)
 				if neighbour not in open_set:
+					var cord = neighbour * TILE_SIZE
 					open_set.append(neighbour)
 	
 	path = [] #return empty if no path found\
@@ -88,7 +89,7 @@ func is_walkable(nodePosition):
 	#TODO: ellaborate logic
 	#Currently checks if tile is within grid bounds and not an obstacle
 	if nodePosition.x >= 0 and nodePosition.x < GRID_WIDTH and nodePosition.y >= 0 and nodePosition.y < GRID_HEIGHT:
-		return grid[int(nodePosition.x)][int(nodePosition.y)] == 1
+		return grid[int(nodePosition.y)][int(nodePosition.x)] == 1
 	return false
 	
 func reconstruct_path(came_from, current):
@@ -109,7 +110,6 @@ func _draw():
 			draw_rect(Rect2(pos, Vector2(TILE_SIZE, TILE_SIZE)), color, true)
 			draw_rect(Rect2(pos, Vector2(TILE_SIZE, TILE_SIZE)), Color(0,0,0), false)
 
-			var coord_text = str(x, ",", y)
 
 	if path.size() > 0:
 		for point in path:
