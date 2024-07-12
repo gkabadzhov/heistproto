@@ -16,7 +16,7 @@ func setup_navAgent():
 	if target:
 		navigation_agent.target_position = target.global_position
 
-func _process(delta):
+func _physics_process(delta):
 	if navigation_agent.is_navigation_finished():
 		return
 		
