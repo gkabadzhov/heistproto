@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqc0v2pb6hbcj"]
+[gd_scene load_steps=23 format=3 uid="uid://dqc0v2pb6hbcj"]
 
 [ext_resource type="Script" path="res://Scenes/Level.gd" id="1_n2xki"]
 [ext_resource type="Texture2D" uid="uid://dvic8yfl3awlt" path="res://Assets/Modern tiles_Free/Interiors_free/16x16/Room_Builder_free_16x16.png" id="2_78y3i"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/CharacterNavAgent.gd" id="3_ro46w"]
 [ext_resource type="Texture2D" uid="uid://ltrvcl3ju123" path="res://Assets/Modern tiles_Free/Interiors_free/16x16/Interiors_free_16x16.png" id="3_xb3pa"]
 [ext_resource type="Texture2D" uid="uid://joxb7qd7i68f" path="res://Assets/white.png" id="5_ohqej"]
+[ext_resource type="Script" path="res://Scenes/target.gd" id="6_3oav4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_51m8e"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1494,6 +1495,9 @@ texture = ExtResource("3_xb3pa")
 [sub_resource type="TileSet" id="TileSet_qdmdj"]
 sources/0 = SubResource("TileSetAtlasSource_yilnr")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkx1l"]
+size = Vector2(16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmpao"]
 atlas = ExtResource("3_mkgcn")
 region = Rect2(288, 72, 16, 24)
@@ -1547,9 +1551,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lj7il"]
 radius = 6.5192
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkx1l"]
-size = Vector2(16, 16)
-
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_n2xki")
 
@@ -1561,11 +1562,28 @@ layer_0/tile_data = PackedInt32Array(-589845, 786432, 6, -655383, 851968, 5, -58
 [node name="Props" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_qdmdj")
 format = 2
+layer_0/tile_data = PackedInt32Array(-524304, 655360, 2, -458768, 655360, 2, -393232, 655360, 2, -327696, 655360, 3, -327695, 720896, 3, -327694, 720896, 3, -327693, 720896, 3, -327692, 851968, 4, -327691, 720896, 3, -327690, 720896, 3, -327689, 720896, 3, -327688, 720896, 3, -327687, 851968, 4, -327686, 720896, 3, -327685, 720896, 3, -327684, 720896, 3, -327683, 851968, 4, -327682, 720896, 3, -327681, 720896, 3, -393216, 851968, 4, -393215, 720896, 3, -393214, 720896, 3, -393213, 720896, 3, -393212, 851968, 4, -393211, 720896, 3, -393210, 720896, 3, -393209, 720896, 3, -393208, 851968, 4, -393207, 720896, 3, -393206, 720896, 3, -393205, 720896, 3, -393204, 851968, 4, -393203, 720896, 3, -393202, 720896, 3, -393228, 851968, 3, -393223, 851968, 3, -393219, 851968, 3, -458752, 851968, 3, -458748, 851968, 3, -458744, 851968, 3, -458740, 851968, 3, -393229, 917504, 2, -393224, 917504, 2, -393220, 917504, 2, -393217, 917504, 2, -458749, 917504, 2, -458745, 917504, 2, -458741, 917504, 2, -720910, 0, 14, -655374, 0, 15, -720909, 65536, 14, -655373, 65536, 15, -720902, 0, 14, -655366, 0, 15, -720901, 65536, 14, -655365, 65536, 15, -786430, 0, 14, -720894, 0, 15, -786429, 65536, 14, -720893, 65536, 15, -786422, 0, 14, -720886, 0, 15, -786421, 65536, 14, -720885, 65536, 15, 720878, 327680, 26, 786414, 327680, 27, 720879, 393216, 26, 786415, 393216, 27, 720880, 458752, 26, 786416, 458752, 27, 720881, 524288, 26, 786417, 524288, 27, 720882, 458752, 26, 786418, 458752, 27, 720883, 524288, 26, 786419, 524288, 27, 720884, 458752, 26, 786420, 458752, 27, 720885, 524288, 26, 786421, 524288, 27, 720886, 458752, 26, 786422, 458752, 27, 720887, 524288, 26, 786423, 524288, 27, 720888, 458752, 26, 786424, 458752, 27, 720889, 524288, 26, 786425, 524288, 27, 720890, 458752, 26, 786426, 458752, 27, 720891, 524288, 26, 786427, 524288, 27, 720892, 458752, 26, 786428, 458752, 27, 720893, 524288, 26, 786429, 524288, 27, 720894, 458752, 26, 786430, 458752, 27, 720895, 524288, 26, 786431, 524288, 27, 655360, 458752, 26, 720896, 458752, 27, 655361, 524288, 26, 720897, 524288, 27, 655362, 458752, 26, 720898, 458752, 27, 655363, 524288, 26, 720899, 524288, 27, 655364, 458752, 26, 720900, 458752, 27, 655365, 524288, 26, 720901, 524288, 27, 655366, 458752, 26, 720902, 458752, 27, 655367, 524288, 26, 720903, 524288, 27, 655368, 458752, 26, 720904, 458752, 27, 655369, 524288, 26, 720905, 524288, 27, 655370, 458752, 26, 720906, 458752, 27, 655371, 524288, 26, 720907, 524288, 27, 655372, 458752, 26, 720908, 458752, 27, 655373, 524288, 26, 720909, 524288, 27, 655374, 458752, 26, 720910, 458752, 27, 655375, 524288, 26, 720911, 524288, 27, 655376, 458752, 26, 720912, 458752, 27, 655377, 524288, 26, 720913, 524288, 27, 655378, 458752, 26, 720914, 458752, 27, -720908, 655360, 68, -655372, 655360, 69, -589836, 655360, 70, -720907, 720896, 68, -655371, 720896, 69, -589835, 720896, 70, -720906, 786432, 68, -655370, 786432, 69, -589834, 786432, 70, -720905, 851968, 68, -655369, 851968, 69, -589833, 851968, 70, -720904, 917504, 68, -655368, 917504, 69, -589832, 917504, 70, -720903, 983040, 68, -655367, 983040, 69, -589831, 983040, 70, -786428, 655360, 68, -720892, 655360, 69, -655356, 655360, 70, -786427, 720896, 68, -720891, 720896, 69, -655355, 720896, 70, -786426, 786432, 68, -720890, 786432, 69, -655354, 786432, 70, -786425, 851968, 68, -720889, 851968, 69, -655353, 851968, 70, -786424, 917504, 68, -720888, 917504, 69, -655352, 917504, 70, -786423, 983040, 68, -720887, 983040, 69, -655351, 983040, 70, -131087, 458752, 76, -65551, 458752, 77, -15, 458752, 78, -131086, 524288, 76, -65550, 524288, 77, -14, 524288, 78, -131085, 589824, 76, -65549, 589824, 77, -13, 589824, 78, -131084, 655360, 76, -65548, 655360, 77, -12, 655360, 78, 196593, 458752, 76, 262129, 458752, 77, 196594, 524288, 76, 262130, 524288, 77, 196595, 589824, 76, 262131, 589824, 77, 196596, 655360, 76, 262132, 655360, 77, 327665, 458752, 77, 327666, 524288, 77, 327667, 589824, 77, 327668, 655360, 77, 393201, 458752, 77, 393202, 524288, 77, 393203, 589824, 77, 393204, 655360, 77, 458737, 458752, 77, 458738, 524288, 77, 458739, 589824, 77, 458740, 655360, 77, 524273, 458752, 77, 524274, 524288, 77, 524275, 589824, 77, 524276, 655360, 77, 589809, 458752, 78, 589810, 524288, 78, 589811, 589824, 78, 589812, 655360, 78)
+
+[node name="Targets" type="Node2D" parent="."]
+
+[node name="Target" type="Area2D" parent="Targets"]
+position = Vector2(-130, 138)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("6_3oav4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Targets/Target"]
+scale = Vector2(0.0688889, 0.0688889)
+texture = ExtResource("5_ohqej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Targets/Target"]
+shape = SubResource("RectangleShape2D_wkx1l")
 
 [node name="Enemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("target")]
-position = Vector2(0.735, 0)
+position = Vector2(-272, 143)
+collision_mask = 3
 script = ExtResource("3_ro46w")
-target = NodePath("../Target")
+target = NodePath("../Targets/Target")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy"]
 sprite_frames = SubResource("SpriteFrames_rba07")
@@ -1573,20 +1591,16 @@ animation = &"walkDown"
 frame_progress = 0.735077
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(0, 4)
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_lj7il")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Enemy"]
-
-[node name="Target" type="Area2D" parent="."]
-position = Vector2(200, 29)
-
-[node name="Sprite2D" type="Sprite2D" parent="Target"]
-scale = Vector2(0.0688889, 0.0688889)
-texture = ExtResource("5_ohqej")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
-shape = SubResource("RectangleShape2D_wkx1l")
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+avoidance_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+
+[connection signal="body_entered" from="Targets/Target" to="Targets/Target" method="_on_body_entered"]
