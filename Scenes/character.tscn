@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://bou8dj6yhcs3m"]
+
+[ext_resource type="Script" path="res://Scripts/CharacterNavAgent.gd" id="1_jwnwn"]
+[ext_resource type="Texture2D" uid="uid://bbs5e2ovhde8o" path="res://Assets/Modern tiles_Free/Characters_free/Alex_16x16.png" id="2_ta2f2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmpao"]
+atlas = ExtResource("2_ta2f2")
+region = Rect2(288, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f0n8"]
+atlas = ExtResource("2_ta2f2")
+region = Rect2(304, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ghy4"]
+atlas = ExtResource("2_ta2f2")
+region = Rect2(320, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1h18"]
+atlas = ExtResource("2_ta2f2")
+region = Rect2(336, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ruw5i"]
+atlas = ExtResource("2_ta2f2")
+region = Rect2(352, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkrg2"]
+atlas = ExtResource("2_ta2f2")
+region = Rect2(368, 72, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rba07"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmpao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f0n8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ghy4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1h18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ruw5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkrg2")
+}],
+"loop": true,
+"name": &"walkDown",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lj7il"]
+radius = 6.5192
+
+[node name="Character" type="CharacterBody2D"]
+position = Vector2(-270, -114)
+collision_mask = 18
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_jwnwn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rba07")
+animation = &"walkDown"
+frame_progress = 0.735077
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_lj7il")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 5.0
+neighbor_distance = 50.0
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

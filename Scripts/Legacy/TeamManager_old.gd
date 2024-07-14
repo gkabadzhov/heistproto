@@ -4,10 +4,10 @@ var characters = []
 var active_team = []
 var max_team_size = 3
 var config_path = "res://configs/character_list.json"
-@export var character_scene_path = "res://Scenes/character.tscn"
+@export var character_scene_path = "res://Scenes/LinePath/character_line_draw.tscn"
 
 var active_character = null
-@onready var game_manager = $".."
+@onready var game_manager = $/root/WhiteRoom/GameManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,7 +66,7 @@ func create_character_node(character_data):
 	character_instance.speed = character_data["speed"]
 	character_instance.heart = character_data["heart"]
 	character_instance.brains = character_data["brains"]
-	#character_instance.set_texture_from_path(character_data["texture_path"])
+	character_instance.set_texture_from_path(character_data["texture_path"])
 	
 	active_team.append(character_instance)
 	add_child(character_instance)

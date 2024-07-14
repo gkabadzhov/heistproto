@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://362cdpdaerke"]
 
-[ext_resource type="PackedScene" uid="uid://b4xq7o08i3qu" path="res://Scenes/AStar/pathfinding.tscn" id="1_lrxc0"]
-[ext_resource type="PackedScene" uid="uid://dwv7dv8qyaa0p" path="res://Scenes/AStar/Character.tscn" id="2_lr27x"]
-[ext_resource type="Script" path="res://SplitScreen/camera_controller.gd" id="3_o7u2w"]
-[ext_resource type="Shader" path="res://SplitScreen/split_screen.gdshader" id="4_14r61"]
-[ext_resource type="Texture2D" uid="uid://bfjnx58lan63n" path="res://SplitScreen/icon.webp" id="5_8677v"]
+[ext_resource type="Script" path="res://SplitScreen/camera_controller.gd" id="1_56328"]
+[ext_resource type="Shader" path="res://SplitScreen/split_screen.gdshader" id="2_lkmcs"]
+[ext_resource type="Texture2D" uid="uid://bfjnx58lan63n" path="res://SplitScreen/icon.webp" id="3_ongx6"]
+[ext_resource type="PackedScene" uid="uid://b4xq7o08i3qu" path="res://Scenes/Legacy/AStar/pathfinding.tscn" id="4_7gyvg"]
+[ext_resource type="PackedScene" uid="uid://dwv7dv8qyaa0p" path="res://Scenes/Legacy/AStar/Character.tscn" id="5_vbcg3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0pg5y"]
-shader = ExtResource("4_14r61")
+shader = ExtResource("2_lkmcs")
 shader_parameter/viewport_size = null
 shader_parameter/split_active = null
 shader_parameter/player1_position = null
@@ -18,7 +18,7 @@ shader_parameter/split_line_color = null
 [node name="SplitScreen" type="Node2D"]
 
 [node name="Cameras" type="Node2D" parent="."]
-script = ExtResource("3_o7u2w")
+script = ExtResource("1_56328")
 max_separation = 10.0
 
 [node name="View" type="TextureRect" parent="Cameras"]
@@ -31,7 +31,7 @@ offset_right = 1152.0
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_8677v")
+texture = ExtResource("3_ongx6")
 
 [node name="Viewport1" type="SubViewport" parent="Cameras"]
 disable_3d = true
@@ -47,11 +47,11 @@ zoom = Vector2(4, 4)
 enabled = false
 zoom = Vector2(8, 8)
 
-[node name="Pathfinding" parent="." instance=ExtResource("1_lrxc0")]
+[node name="Pathfinding" parent="." instance=ExtResource("4_7gyvg")]
 
-[node name="Character" parent="Pathfinding" instance=ExtResource("2_lr27x")]
+[node name="Character" parent="Pathfinding" instance=ExtResource("5_vbcg3")]
 goal = Vector2(0, 1)
 
-[node name="Character2" parent="Pathfinding" instance=ExtResource("2_lr27x")]
+[node name="Character2" parent="Pathfinding" instance=ExtResource("5_vbcg3")]
 start = Vector2(3, 3)
 goal = Vector2(6, 6)

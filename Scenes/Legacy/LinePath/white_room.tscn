@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtp210cnoeupt"]
 
-[ext_resource type="Script" path="res://Scripts/PathLine.gd" id="1_vpacy"]
+[ext_resource type="Script" path="res://Scripts/Legacy/PathLine.gd" id="1_vpacy"]
 [ext_resource type="Texture2D" uid="uid://7xqep5m2ynp" path="res://Assets/68362641-apartment-floor-plan-blueprint-top-view-basic-room-of-home-vector-illustration.jpg" id="2_c1ce3"]
-[ext_resource type="Script" path="res://Scripts/GameManager.gd" id="3_iu2pj"]
-[ext_resource type="Script" path="res://Scripts/TeamManager.gd" id="4_g8e12"]
-[ext_resource type="PackedScene" uid="uid://dco3oj5xcqatv" path="res://Scenes/LinePath/ui_overlay.tscn" id="5_vpeme"]
-[ext_resource type="Script" path="res://Scripts/ConfrontationOverlay.gd" id="6_vplye"]
+[ext_resource type="Script" path="res://Scripts/Legacy/GameManager_old.gd" id="3_iu2pj"]
+[ext_resource type="Script" path="res://Scripts/Legacy/TeamManager_old.gd" id="4_g8e12"]
+[ext_resource type="PackedScene" uid="uid://dco3oj5xcqatv" path="res://Scenes/Legacy/LinePath/ui_overlay.tscn" id="5_vpeme"]
+[ext_resource type="Script" path="res://Scripts/Legacy/ConfrontationOverlay.gd" id="6_vplye"]
 
 [node name="WhiteRoom" type="Node2D"]
 script = ExtResource("1_vpacy")

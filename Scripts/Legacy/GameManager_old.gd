@@ -10,8 +10,8 @@ var current_state = GameState.RECRUITING
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	team_manager = $TeamManager
-	#ui_overlay = get_node("/root/WhiteRoom/UIOverlay")
-	#ui_overlay.connect("button_pressed", Callable(self, "_on_button_pressed"))
+	ui_overlay = get_node("/root/WhiteRoom/UIOverlay")
+	ui_overlay.connect("button_pressed", Callable(self, "_on_button_pressed"))
 	update_game_state()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,13 +32,13 @@ func start_execution():
 func start_confrontation():
 	current_state = GameState.CONFRONTATION
 	team_manager.pause_all_characters()
-	#ui_overlay.show_overlay()
+	ui_overlay.show_overlay()
 	#get_tree().paused = true
 	print("Current Game State is: ", current_state)
 
 func end_confrontation():
 	current_state = GameState.EXECUTION
-	#ui_overlay.hide_overlay()
+	ui_overlay.hide_overlay()
 	team_manager.unpause_all_characters()
 	#get_tree().paused = false
 	print("current Game State is: ", current_state)

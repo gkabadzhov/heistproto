@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dco3oj5xcqatv"]
 
-[ext_resource type="Script" path="res://Scripts/ui_overlay.gd" id="1_ir0jf"]
+[ext_resource type="Script" path="res://Scripts/Legacy/ui_overlay.gd" id="1_ir0jf"]
 [ext_resource type="Texture2D" uid="uid://uq0aps21crk0" path="res://Assets/Comic1.png" id="2_5mess"]
 [ext_resource type="Texture2D" uid="uid://bg5nk2soxcl88" path="res://Assets/Comic2.png" id="3_o0g5h"]
 [ext_resource type="Texture2D" uid="uid://b74m52m2xo322" path="res://Assets/Comic3.png" id="4_x357k"]

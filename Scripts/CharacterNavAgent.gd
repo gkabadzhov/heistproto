@@ -5,6 +5,11 @@ extends CharacterBody2D
 var speed = 50
 var acceleration = 5
 
+var characterName = ""
+var role = ""
+var heart = 0
+var brains = 0
+
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready():		
@@ -35,6 +40,15 @@ func _physics_process(delta):
 		
 	var current_agent_position = global_position
 	var next_path_position = navigation_agent.get_next_path_position()
-	velocity = current_agent_position.direction_to(next_path_position) * speed
+	var new_velocity = current_agent_position.direction_to(next_path_position) * speed
+	
+	if navigation_agent.avoidance_enabled:
+		navigation_agent.set_velocity(new_velocity)
+	else:
+		_on_navigation_agent_2d_velocity_computed(new_velocity)
 	
 	move_and_slide()
+
+
+func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	velocity = safe_velocity
