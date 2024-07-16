@@ -22,5 +22,13 @@
 		"heart": 50,
 		"brains": 50,
 		"texture_path": "res://Assets/Blue.png"
+	},
+	{
+		"name": "Barbarian",
+		"role": "Breaker",
+		"speed": 400,
+		"heart": 50,
+		"brains": 50,
+		"texture_path": "res://Assets/Blue.png"
 	}
 ]
