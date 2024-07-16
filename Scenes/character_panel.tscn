@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhhnwktvf8g8b"]
+
+[ext_resource type="Script" path="res://Scenes/character_panel.gd" id="1_0xhrl"]
+[ext_resource type="Script" path="res://Scenes/TextureRect.gd" id="2_cobai"]
+[ext_resource type="Script" path="res://Scenes/RichTextLabel.gd" id="3_k7hf7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbjyb"]
+bg_color = Color(1, 1, 1, 0.223529)
+corner_detail = 2
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+shadow_size = 2
+
+[node name="CharacterPanel" type="PanelContainer"]
+offset_right = 120.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_0xhrl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+use_parent_material = true
+clip_contents = true
+custom_minimum_size = Vector2(120, 60)
+layout_direction = 2
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_cobai")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.913725, 0.411765, 0.184314, 1)
+theme_override_font_sizes/normal_font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_rbjyb")
+fit_content = true
+autowrap_mode = 0
+visible_characters_behavior = 3
+script = ExtResource("3_k7hf7")

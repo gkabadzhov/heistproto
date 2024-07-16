@@ -1,13 +1,19 @@
 extends Node2D
 
-var characters = []
+class_name TeamManager
+
+var characters: Array[Character] = []
+var selected_characters: Array[Character] = []
 var active_team = []
 var max_team_size = 3
 var config_path = "res://configs/character_list.json"
+
 @export var character_scene_path = "res://Scenes/character.tscn"
 
 var active_character = null
 @onready var game_manager = $".."
+
+signal selection_changed(selected: Array[Character])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,28 +24,74 @@ func _ready():
 func _process(_delta):
 	pass
 
+func parse_entries(data_array: Array) -> Array[Character]:
+	var entries: Array[Character] = []
+	for data in data_array:
+		var entry = Character.new()
+		entry.name = data.get("name", "None")
+		entry.role = data.get("role", "None")
+		entry.brains = data.get("name", 0)
+		entry.heart = data.get("heart", 0)
+		entry.speed = data.get("speed", 0)
+		entry.texture_path = data.get("texture_path", null)
+		entries.append(entry)
+	return entries
+
 func load_characters_from_config():
 	var file = FileAccess.open(config_path, FileAccess.READ)
-	if file: 
-		var data = file.get_as_text()
-		
-		# Is below supposed to work? Kinda sus. TODO: check later
-		var parsed = JSON.parse_string(data)
-		characters = parsed
-		
-		file.close()
+	if file:
+		var json = JSON.new()
+		var content: String = file.get_as_text()
+		var result = json.parse(content)
+		if result != OK:
+			print("Failed to load character list config")
+			pass
+		characters = parse_entries(json.data)
+		json = null
+		print('Parsed characters! ', characters)
 	else:
 		print("Failed to load character list config")
-	
 
-func select_character(character_name):
-	if character_name in characters and character_name not in active_team and active_team.size() < max_team_size:
-		
-		create_character_node(character_name)
-		print("Selected character: ", character_name.name)
+	file.close()
+
+#TODO: Characters should probably have an ID and we should use that for operations
+func toggle_character(character_name: String):
+	var character: Character = null
+	for char in characters:
+		if char.name == character_name:
+			character = char
+			break
+	if character == null:
+		print('Character not found! Aborting')
+		return
+	if character not in selected_characters:
+		if selected_characters.size() >= max_team_size:
+			print('Team size reached! Aborting')
+			return
+		selected_characters.append(character)
+	elif character in selected_characters:
+		selected_characters.erase(character)
+	selection_changed.emit(selected_characters)
+
+func select_character(character: Character):
+	if character in characters and character not in active_team and active_team.size() < max_team_size:
+		create_character_node(character)
+		print("Selected character: ", character.name)
 		game_manager.update_game_state()
-	else: 
-		print("Cannot select character: ", character_name)
+		selection_changed.emit(active_team)
+	else:
+		print("Cannot select character: ", character)
+
+func is_character_selected(character_name: String):
+	for item in selected_characters:
+		if item.name == character_name:
+			return true
+	return false
+
+func rush_b():
+	for character in selected_characters:
+		select_character(character)
+		set_active_character_by_index(0)
 
 func set_active_character_by_index(index):
 	if index >= 0 and index < active_team.size():
@@ -59,32 +111,32 @@ func get_active_character():
 func create_character_node(character_data):
 	var character_scene = load(character_scene_path)
 	var character_instance = character_scene.instantiate()
-	
+
 	#Assign properties
-	character_instance.characterName = character_data["name"] 
+	character_instance.characterName = character_data["name"]
 	character_instance.role = character_data["role"]
 	character_instance.speed = character_data["speed"]
 	character_instance.heart = character_data["heart"]
 	character_instance.brains = character_data["brains"]
 	#character_instance.set_texture_from_path(character_data["texture_path"])
-	
+
 	active_team.append(character_instance)
 	add_child(character_instance)
-	
+
 func get_active_team():
 	return active_team
-	
+
 func pause_all_characters():
 	for character in active_team:
 		character.pause()
-		
+
 func unpause_all_characters():
 	for character in active_team:
 		character.unpause()
 
 func notify_active_character_to_continue():
 	if active_character:
-		active_character.following = true	
+		active_character.following = true
 
 func _input(event):
 	if event is InputEventKey:
