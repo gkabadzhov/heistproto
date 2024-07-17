@@ -1,15 +1,17 @@
 extends Node2D
 
+class_name GameManager
+
 enum GameState {RECRUITING, PLANNING, EXECUTION, CONFRONTATION}
 var current_state = GameState.RECRUITING
 
 @export var max_team_size: int = 3
-@onready var team_manager: Node2D = null
-@onready var ui_overlay: Control = null
+
+@onready var go_button: Button = $"../Button"
+@onready var team_manager: TeamManager = $TeamManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	team_manager = $TeamManager
 	#ui_overlay = get_node("/root/WhiteRoom/UIOverlay")
 	#ui_overlay.connect("button_pressed", Callable(self, "_on_button_pressed"))
 	update_game_state()
@@ -28,7 +30,7 @@ func update_game_state():
 func start_execution():
 	current_state = GameState.EXECUTION
 	print("Current Game State is: ", current_state)
-	
+
 func start_confrontation():
 	current_state = GameState.CONFRONTATION
 	team_manager.pause_all_characters()

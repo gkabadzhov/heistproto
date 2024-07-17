@@ -20,25 +20,25 @@ func _process(_delta):
 
 func load_characters_from_config():
 	var file = FileAccess.open(config_path, FileAccess.READ)
-	if file: 
+	if file:
 		var data = file.get_as_text()
-		
+
 		# Is below supposed to work? Kinda sus. TODO: check later
 		var parsed = JSON.parse_string(data)
 		characters = parsed
-		
+
 		file.close()
 	else:
 		print("Failed to load character list config")
-	
+
 
 func select_character(character_name):
 	if character_name in characters and character_name not in active_team and active_team.size() < max_team_size:
-		
+
 		create_character_node(character_name)
 		print("Selected character: ", character_name.name)
 		game_manager.update_game_state()
-	else: 
+	else:
 		print("Cannot select character: ", character_name)
 
 func set_active_character_by_index(index):
@@ -59,32 +59,32 @@ func get_active_character():
 func create_character_node(character_data):
 	var character_scene = load(character_scene_path)
 	var character_instance = character_scene.instantiate()
-	
+
 	#Assign properties
-	character_instance.characterName = character_data["name"] 
+	character_instance.characterName = character_data["name"]
 	character_instance.role = character_data["role"]
 	character_instance.speed = character_data["speed"]
 	character_instance.heart = character_data["heart"]
 	character_instance.brains = character_data["brains"]
 	character_instance.set_texture_from_path(character_data["texture_path"])
-	
+
 	active_team.append(character_instance)
 	add_child(character_instance)
-	
+
 func get_active_team():
 	return active_team
-	
+
 func pause_all_characters():
 	for character in active_team:
 		character.pause()
-		
+
 func unpause_all_characters():
 	for character in active_team:
 		character.unpause()
 
 func notify_active_character_to_continue():
 	if active_character:
-		active_character.following = true	
+		active_character.following = true
 
 func _input(event):
 	if event is InputEventKey:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dqc0v2pb6hbcj"]
+[gd_scene load_steps=24 format=3 uid="uid://dqc0v2pb6hbcj"]
 
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1_4bufp"]
 [ext_resource type="Texture2D" uid="uid://dvic8yfl3awlt" path="res://Assets/Modern tiles_Free/Interiors_free/16x16/Room_Builder_free_16x16.png" id="2_0eeby"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://joxb7qd7i68f" path="res://Assets/white.png" id="5_7iyq1"]
 [ext_resource type="Script" path="res://Scripts/TeamManager.gd" id="5_ofu67"]
 [ext_resource type="PackedScene" uid="uid://bou8dj6yhcs3m" path="res://Scenes/character.tscn" id="6_85cyi"]
+[ext_resource type="PackedScene" uid="uid://dmg2yrtqux22b" path="res://Scenes/team_list.tscn" id="10_pcre6"]
+[ext_resource type="Script" path="res://Scenes/go_button.gd" id="11_65ii0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_51m8e"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -4268,6 +4270,31 @@ sources/1 = SubResource("TileSetAtlasSource_jhf2f")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wkx1l"]
 size = Vector2(16, 16)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbxfe"]
+bg_color = Color(0.234813, 0.752407, 0.373256, 1)
+shadow_color = Color(0.234813, 0.752407, 0.373256, 1)
+shadow_size = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bif4i"]
+bg_color = Color(0.242251, 0.744588, 0.476651, 1)
+shadow_color = Color(0.234813, 0.752407, 0.373256, 1)
+shadow_size = 3
+shadow_offset = Vector2(-1, 0)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ysac2"]
+bg_color = Color(0.0901961, 0.639216, 0.372549, 1)
+shadow_color = Color(0.0784314, 0.560784, 0.32549, 1)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ignuo"]
+bg_color = Color(0.85098, 0.85098, 0.85098, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q02y3"]
+draw_center = false
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_4bufp")
 
@@ -4340,6 +4367,37 @@ target = NodePath("../Targets/Target")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+
+[node name="TeamList" parent="." instance=ExtResource("10_pcre6")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -382.0
+offset_top = -215.0
+offset_right = -28.0
+offset_bottom = -215.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(120, 0)
+offset_left = -380.0
+offset_top = 146.0
+offset_right = -260.0
+offset_bottom = 163.0
+scale = Vector2(1.96985, 2.4796)
+theme_override_colors/font_color = Color(0.736796, 0.999334, 0.822804, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_fbxfe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bif4i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ysac2")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ignuo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_q02y3")
+disabled = true
+text = "Rush B"
+script = ExtResource("11_65ii0")
 
 [connection signal="body_entered" from="Targets/Target" to="Targets/Target" method="_on_body_entered"]
 [connection signal="body_entered" from="Targets/Target2" to="Targets/Target2" method="_on_body_entered"]
