@@ -4311,10 +4311,16 @@ script = ExtResource("5_ofu67")
 [node name="Targets" type="Node2D" parent="." groups=["Targets"]]
 
 [node name="Target_1" parent="Targets" instance=ExtResource("7_2qlcy")]
-position = Vector2(92, -21)
+position = Vector2(176, -13)
 
 [node name="Target_2" parent="Targets" instance=ExtResource("7_2qlcy")]
-position = Vector2(200, 0)
+position = Vector2(183, -96)
+
+[node name="Target_3" parent="Targets" instance=ExtResource("7_2qlcy")]
+position = Vector2(56, 31)
+
+[node name="Target_4" parent="Targets" instance=ExtResource("7_2qlcy")]
+position = Vector2(-109, 142)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)

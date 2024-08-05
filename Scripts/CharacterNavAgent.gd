@@ -14,6 +14,7 @@ var character_path = []
 
 enum CharacterState {IDLE, WALKING}
 var current_state = CharacterState.IDLE
+var current_target_index: int = 0
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -40,7 +41,6 @@ func _physics_process(_delta):
 		pass
 	
 	if current_state == CharacterState.WALKING:
-		print("target position is:", navigation_agent.target_position)
 		var current_agent_position = global_position
 		var next_path_position = navigation_agent.get_next_path_position()
 		var new_velocity = current_agent_position.direction_to(next_path_position) * speed
@@ -51,11 +51,22 @@ func _physics_process(_delta):
 			_on_navigation_agent_2d_velocity_computed(new_velocity)
 		
 		move_and_slide()
+		
+		if global_position.distance_to(navigation_agent.target_position) < 5.0:
+			reached_target()
 
 func start_walking():
 	current_state = CharacterState.WALKING
+	current_target_index = 0
 	acquire_target_by_path_index(0)
 
+func reached_target():
+	current_target_index += 1
+	if current_target_index < character_path.size():
+		acquire_target_by_path_index(current_target_index)
+	else:
+		current_state = CharacterState.IDLE
+	
 
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
