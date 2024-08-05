@@ -2,6 +2,7 @@ extends Button
 
 
 @onready var team_manager: TeamManager = $"../GameManager/TeamManager"
+@onready var game_manager: GameManager = $"../GameManager"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,4 +18,4 @@ func toggle_disabled(arr: Array):
 	disabled = !arr or arr.size() < 1
 
 func _pressed():
-	team_manager.rush_b()
+	game_manager.start_execution()

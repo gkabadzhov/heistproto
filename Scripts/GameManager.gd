@@ -29,6 +29,7 @@ func update_game_state():
 
 func start_execution():
 	current_state = GameState.EXECUTION
+	team_manager.rush_b()
 	print("Current Game State is: ", current_state)
 
 func start_confrontation():
@@ -47,6 +48,6 @@ func end_confrontation():
 
 func _on_button_pressed():
 	print("Button pressed in GameManager")
-	end_confrontation()
+	update_game_state()
 	team_manager.notify_active_character_to_continue()
 	#team_manager.notify_active_character_to_continue()

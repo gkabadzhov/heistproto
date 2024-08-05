@@ -12,6 +12,7 @@ var config_path = "res://configs/character_list.json"
 
 var active_character = null
 @onready var game_manager = $".."
+@onready var targets = $"../../Targets"
 
 signal selection_changed(selected: Array[Character])
 
@@ -19,6 +20,12 @@ signal selection_changed(selected: Array[Character])
 func _ready():
 	load_characters_from_config()
 	print("Generated characters: ", characters)
+	
+	#TODO: logic should not be in team manager script? 
+	#       Need to figure out a better way to get the ref
+	var available_targets = targets.get_children()
+	for target in available_targets:
+		target.connect("target_clicked", Callable(self, "_on_target_clicked"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -57,9 +64,9 @@ func load_characters_from_config():
 #TODO: Characters should probably have an ID and we should use that for operations
 func toggle_character(character_name: String):
 	var character: Character = null
-	for char in characters:
-		if char.name == character_name:
-			character = char
+	for curr_char in characters:
+		if curr_char.name == character_name:
+			character = curr_char
 			break
 	if character == null:
 		print('Character not found! Aborting')
@@ -73,9 +80,10 @@ func toggle_character(character_name: String):
 		selected_characters.erase(character)
 	selection_changed.emit(selected_characters)
 
+
 func select_character(character: Character):
 	if character in characters and character not in active_team and active_team.size() < max_team_size:
-		create_character_node(character)
+		var char_instance = create_character_node(character)
 		print("Selected character: ", character.name)
 		game_manager.update_game_state()
 		selection_changed.emit(active_team)
@@ -89,21 +97,21 @@ func is_character_selected(character_name: String):
 	return false
 
 func rush_b():
-	for character in selected_characters:
-		select_character(character)
-		set_active_character_by_index(0)
+	for character in active_team:
+		character.start_walking()
 
 func set_active_character_by_index(index):
-	if index >= 0 and index < active_team.size():
+	if index >= 0 and index <= active_team.size():
 		var character_data = active_team[index]
 		for character_node in get_children():
 			print(character_node.characterName, character_data.characterName)
-			if character_node is Sprite2D and character_node.characterName == character_data.characterName:
+			if character_node.characterName == character_data.characterName:
 				active_character = character_node
 				print("Active character: ", active_character.characterName)
 				#$ActivePlayerLabel.text = str(active_character.characterName)
 				return
-	print("Invalid character index: ", index)
+	else: 
+		print("Invalid character index: ", index)
 
 func get_active_character():
 	return active_character
@@ -162,3 +170,11 @@ func _input(event):
 			elif event.keycode == KEY_ENTER:
 				game_manager.end_confrontation()
 
+
+
+func _on_target_clicked(target):
+	print("Target clicked: ", target)
+	var active_char = get_active_character()
+	print("Active char is: ", active_char)
+	print("Active target is: ", target)
+	active_char.add_to_path(target)

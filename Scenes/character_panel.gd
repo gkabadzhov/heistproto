@@ -18,6 +18,8 @@ func _ready():
 	team_manager.selection_changed.connect(handle_select)
 	pass
 
+#TODO: Need to fix logic, can only have 1 selected character at a time.
+
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:

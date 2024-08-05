@@ -1,12 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqc0v2pb6hbcj"]
+[gd_scene load_steps=24 format=3 uid="uid://dqc0v2pb6hbcj"]
 
 [ext_resource type="Script" path="res://Scripts/Level.gd" id="1_4bufp"]
 [ext_resource type="Texture2D" uid="uid://dvic8yfl3awlt" path="res://Assets/Modern tiles_Free/Interiors_free/16x16/Room_Builder_free_16x16.png" id="2_0eeby"]
 [ext_resource type="Texture2D" uid="uid://ltrvcl3ju123" path="res://Assets/Modern tiles_Free/Interiors_free/16x16/Interiors_free_16x16.png" id="3_q0q7v"]
 [ext_resource type="Script" path="res://Scenes/TileMapNav.gd" id="4_40ndq"]
+[ext_resource type="Script" path="res://Scripts/target.gd" id="4_56bjh"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="4_fy2t6"]
+[ext_resource type="Texture2D" uid="uid://joxb7qd7i68f" path="res://Assets/white.png" id="5_7iyq1"]
 [ext_resource type="Script" path="res://Scripts/TeamManager.gd" id="5_ofu67"]
-[ext_resource type="PackedScene" uid="uid://bshu23mnhj868" path="res://Scenes/target.tscn" id="7_2qlcy"]
+[ext_resource type="PackedScene" uid="uid://bou8dj6yhcs3m" path="res://Scenes/character.tscn" id="6_85cyi"]
 [ext_resource type="PackedScene" uid="uid://dmg2yrtqux22b" path="res://Scenes/team_list.tscn" id="10_pcre6"]
 [ext_resource type="Script" path="res://Scenes/go_button.gd" id="11_65ii0"]
 
@@ -4265,6 +4267,9 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_efn7n")
 sources/1 = SubResource("TileSetAtlasSource_jhf2f")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkx1l"]
+size = Vector2(16, 16)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbxfe"]
 bg_color = Color(0.234813, 0.752407, 0.373256, 1)
 shadow_color = Color(0.234813, 0.752407, 0.373256, 1)
@@ -4310,11 +4315,55 @@ script = ExtResource("5_ofu67")
 
 [node name="Targets" type="Node2D" parent="." groups=["Targets"]]
 
-[node name="Target_1" parent="Targets" instance=ExtResource("7_2qlcy")]
-position = Vector2(92, -21)
+[node name="Target" type="Area2D" parent="Targets"]
+position = Vector2(209, -33)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("4_56bjh")
 
-[node name="Target_2" parent="Targets" instance=ExtResource("7_2qlcy")]
-position = Vector2(200, 0)
+[node name="Sprite2D" type="Sprite2D" parent="Targets/Target"]
+scale = Vector2(0.0688889, 0.0688889)
+texture = ExtResource("5_7iyq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Targets/Target"]
+shape = SubResource("RectangleShape2D_wkx1l")
+
+[node name="Target2" type="Area2D" parent="Targets"]
+position = Vector2(-131, -101)
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("4_56bjh")
+
+[node name="Sprite2D" type="Sprite2D" parent="Targets/Target2"]
+scale = Vector2(0.0688889, 0.0688889)
+texture = ExtResource("5_7iyq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Targets/Target2"]
+shape = SubResource("RectangleShape2D_wkx1l")
+
+[node name="Character" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_85cyi")]
+visible = false
+target = NodePath("../Targets/Target")
+
+[node name="Character2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_85cyi")]
+visible = false
+position = Vector2(-270, -69)
+target = NodePath("../Targets/Target")
+
+[node name="Character3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_85cyi")]
+visible = false
+position = Vector2(-259, -17)
+target = NodePath("../Targets/Target")
+
+[node name="Character4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_85cyi")]
+visible = false
+position = Vector2(-92, 124)
+target = NodePath("../Targets/Target")
+
+[node name="Character5" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_85cyi")]
+visible = false
+position = Vector2(-195, 195)
+target = NodePath("../Targets/Target")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
@@ -4349,3 +4398,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_q02y3")
 disabled = true
 text = "Rush B"
 script = ExtResource("11_65ii0")
+
+[connection signal="body_entered" from="Targets/Target" to="Targets/Target" method="_on_body_entered"]
+[connection signal="input_event" from="Targets/Target" to="Targets/Target" method="_on_input_event"]
+[connection signal="body_entered" from="Targets/Target2" to="Targets/Target2" method="_on_body_entered"]
