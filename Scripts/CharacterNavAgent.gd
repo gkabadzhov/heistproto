@@ -29,6 +29,7 @@ func setup_navAgent():
 		
 func add_to_path(target_node : Node2D):
 	character_path.append(target_node)
+	print(character_path)
 	
 	
 func acquire_target_by_path_index(index):
@@ -58,7 +59,10 @@ func _physics_process(_delta):
 func start_walking():
 	current_state = CharacterState.WALKING
 	current_target_index = 0
-	acquire_target_by_path_index(0)
+	if character_path.size() > 0:
+		acquire_target_by_path_index(0)
+	else:
+		print("Active character", self.name, " doesn't have a path")
 
 func reached_target():
 	current_target_index += 1
