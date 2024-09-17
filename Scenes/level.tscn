@@ -4355,3 +4355,11 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_q02y3")
 disabled = true
 text = "Rush B"
 script = ExtResource("11_65ii0")
+
+[node name="AIManager" type="Node2D" parent="."]
+
+[node name="StaffManager" type="Node2D" parent="AIManager"]
+
+[node name="CivilianManager" type="Node2D" parent="AIManager"]
+
+[node name="GuardManager" type="Node2D" parent="AIManager"]
