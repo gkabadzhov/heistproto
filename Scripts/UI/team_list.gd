@@ -6,7 +6,7 @@ class_name TeamList
 @onready var char_list: Array
 @onready var character_container: HFlowContainer = $"PanelContainer/HFlowContainer"
 
-var char_panel_scene = load("res://Scenes/character_panel.tscn")
+var char_panel_scene = load("res://Scenes/UI/character_panel.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("My parent is " + team_manager.config_path)

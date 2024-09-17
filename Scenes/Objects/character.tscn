@@ -1,30 +1,30 @@
 [gd_scene load_steps=11 format=3 uid="uid://bou8dj6yhcs3m"]
 
-[ext_resource type="Script" path="res://Scripts/CharacterNavAgent.gd" id="1_jwnwn"]
-[ext_resource type="Texture2D" uid="uid://bbs5e2ovhde8o" path="res://Assets/Modern tiles_Free/Characters_free/Alex_16x16.png" id="2_ta2f2"]
+[ext_resource type="Script" path="res://Scripts/Character/CharacterNavAgent.gd" id="1_fi13y"]
+[ext_resource type="Texture2D" uid="uid://bbs5e2ovhde8o" path="res://Assets/Modern tiles_Free/Characters_free/Alex_16x16.png" id="2_x3t67"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmpao"]
-atlas = ExtResource("2_ta2f2")
+atlas = ExtResource("2_x3t67")
 region = Rect2(288, 72, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0f0n8"]
-atlas = ExtResource("2_ta2f2")
+atlas = ExtResource("2_x3t67")
 region = Rect2(304, 72, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ghy4"]
-atlas = ExtResource("2_ta2f2")
+atlas = ExtResource("2_x3t67")
 region = Rect2(320, 72, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x1h18"]
-atlas = ExtResource("2_ta2f2")
+atlas = ExtResource("2_x3t67")
 region = Rect2(336, 72, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ruw5i"]
-atlas = ExtResource("2_ta2f2")
+atlas = ExtResource("2_x3t67")
 region = Rect2(352, 72, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkrg2"]
-atlas = ExtResource("2_ta2f2")
+atlas = ExtResource("2_x3t67")
 region = Rect2(368, 72, 16, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rba07"]
@@ -61,7 +61,7 @@ position = Vector2(-270, -114)
 collision_mask = 18
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_jwnwn")
+script = ExtResource("1_fi13y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rba07")

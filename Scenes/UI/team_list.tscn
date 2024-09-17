@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dmg2yrtqux22b"]
 
-[ext_resource type="Script" path="res://Scenes/team_list.gd" id="1_74l4f"]
+[ext_resource type="Script" path="res://Scripts/UI/team_list.gd" id="1_74l4f"]
+
 
 [node name="TeamList" type="Control"]
 layout_mode = 3

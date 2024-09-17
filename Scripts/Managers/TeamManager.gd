@@ -8,7 +8,7 @@ var active_team = []
 var max_team_size = 3
 var config_path = "res://configs/character_list.json"
 
-@export var character_scene_path = "res://Scenes/character.tscn"
+@export var character_scene_path = "res://Scenes/Objects/character.tscn"
 
 var active_character = null
 @onready var game_manager = $".."

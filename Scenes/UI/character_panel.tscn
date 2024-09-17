@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhhnwktvf8g8b"]
 
-[ext_resource type="Script" path="res://Scenes/character_panel.gd" id="1_0xhrl"]
-[ext_resource type="Script" path="res://Scenes/TextureRect.gd" id="2_cobai"]
-[ext_resource type="Script" path="res://Scenes/RichTextLabel.gd" id="3_k7hf7"]
+[ext_resource type="Script" path="res://Scripts/UI/character_panel.gd" id="1_0xhrl"]
+[ext_resource type="Script" path="res://Scripts/UI/TextureRect.gd" id="2_cobai"]
+[ext_resource type="Script" path="res://Scripts/UI/RichTextLabel.gd" id="3_k7hf7"]
+
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbjyb"]
 bg_color = Color(1, 1, 1, 0.223529)
