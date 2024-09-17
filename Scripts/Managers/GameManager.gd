@@ -10,6 +10,9 @@ var current_state = GameState.RECRUITING
 @onready var go_button: Button = $"../Button"
 @onready var team_manager: TeamManager = $TeamManager
 
+var character_in_confrontation = null
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#ui_overlay = get_node("/root/WhiteRoom/UIOverlay")
@@ -32,19 +35,24 @@ func start_execution():
 	team_manager.rush_b()
 	print("Current Game State is: ", current_state)
 
-func start_confrontation():
+func start_confrontation(character):
 	current_state = GameState.CONFRONTATION
 	team_manager.pause_all_characters()
+	character_in_confrontation = character;
 	#ui_overlay.show_overlay()
 	#get_tree().paused = true
 	print("Current Game State is: ", current_state)
+	print("Confrontation started for: ", character.characterName)
 
 func end_confrontation():
 	current_state = GameState.EXECUTION
 	#ui_overlay.hide_overlay()
 	team_manager.unpause_all_characters()
+	if character_in_confrontation != null:
+		character_in_confrontation.continue_to_next_target()
+		character_in_confrontation = null
 	#get_tree().paused = false
-	print("current Game State is: ", current_state)
+	print("Back to execution phase")
 
 func _on_button_pressed():
 	print("Button pressed in GameManager")

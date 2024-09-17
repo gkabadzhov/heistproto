@@ -168,6 +168,7 @@ func _input(event):
 			elif event.keycode == KEY_E:
 				set_active_character_by_index(2)
 			elif event.keycode == KEY_ENTER:
+				print("On space clicked")
 				game_manager.end_confrontation()
 
 
