@@ -19,3 +19,4 @@ func toggle_disabled(arr: Array):
 
 func _pressed():
 	game_manager.start_execution()
+	release_focus()

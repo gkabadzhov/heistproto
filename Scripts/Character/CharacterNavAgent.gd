@@ -57,7 +57,7 @@ func _physics_process(_delta):
 		
 		move_and_slide()
 		
-		if global_position.distance_to(navigation_agent.target_position) < 3.0:
+		if global_position.distance_to(navigation_agent.target_position) < 5.0:
 			reached_target()
 
 func start_walking():
@@ -90,7 +90,7 @@ func pause():
 	
 func unpause():
 	is_paused = false
-	
+		
 	if current_target_index < character_path.size():
 		current_state = CharacterState.WALKING
 		navigation_agent.target_position = character_path[current_target_index].global_position
