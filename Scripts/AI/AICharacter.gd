@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name AICharacter
 
 var starting_point : Vector2
-var current_target : Node2D = null
+@export var current_target : Node2D = null
 var is_moving = false
 var speed = 10
 
@@ -18,13 +18,25 @@ func move_to_interaction_point(interaction_point: Node2D):
 	is_moving = true
 	
 func _physics_process(delta):
-	if is_moving and navigation_agent.get_next_path_position() != null:
-		var next_position = navigation_agent.get_next_path_position()
-		move_and_slide()
-
-	if self.global_position.distance_to(current_target.global_position) < 3.0:
-		interaction_complete()
+	
+#	if is_moving:
+		var movement_delta = speed * delta
+		var next_path_position = navigation_agent.get_next_path_position()
+		var new_velocity = global_position.direction_to(next_path_position) * movement_delta
 		
+		if navigation_agent.avoidance_enabled:
+			navigation_agent.set_velocity(new_velocity)
+		else:
+			_on_navigation_agent_2d_velocity_computed(new_velocity)
+			
+		print("my name is: ", self.name, ", with distance of: ", global_position.distance_to(navigation_agent.target_position))
+		if global_position.distance_to(navigation_agent.target_position) < 5.0:
+			interaction_complete()
+		
+func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	velocity = safe_velocity
+	move_and_slide()
+	
 func interaction_complete():
 	is_moving = false
 	print("Purchase at", current_target.name)

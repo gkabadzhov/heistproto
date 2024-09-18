@@ -1,15 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://n1bhajs2hrpj"]
 
-[ext_resource type="Script" path="res://Scenes/Objects/AICharacter.gd" id="1_6kghy"]
+[ext_resource type="Script" path="res://Scripts/AI/AICharacter.gd" id="1_cw03n"]
 [ext_resource type="Texture2D" uid="uid://51bbusb3u6eh" path="res://icon.svg" id="1_tuwk1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ojab"]
 size = Vector2(125, 125)
 
 [node name="AICharacter" type="CharacterBody2D"]
-script = ExtResource("1_6kghy")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+script = ExtResource("1_cw03n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
@@ -19,3 +17,8 @@ texture = ExtResource("1_tuwk1")
 position = Vector2(2.98023e-08, 2.98023e-08)
 scale = Vector2(0.2, 0.2)
 shape = SubResource("RectangleShape2D_7ojab")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+path_postprocessing = 1
+avoidance_enabled = true

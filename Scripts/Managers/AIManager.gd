@@ -11,4 +11,5 @@ extends Node2D
 func _process(delta):
 	if disturbance <= 20:
 		print("Low disturbance, routine behaviour")
-		civil_manager.handle_civil_routines()
+#		civil_manager.handle_civil_routines()
+		disturbance = disturbance + 25

@@ -7,16 +7,18 @@ class_name CivilManager
 var civil_list: Array[AICharacter] = []
 
 func _ready():
+	
 	for child in get_children():
-		pass
 		if child is AICharacter:
 			civil_list.append(child)
 
 func handle_civil_routines(): 
-	var available_staff_points = get_parent().staff_manager.get_available_interaction_points()
+	var available_staff_point = get_parent().staff_manager.get_available_interaction_points()
 	
-	if available_staff_points.size() > 0:
-		var target_point = available_staff_points[0]
+	if available_staff_point != null:
+		var target_point = available_staff_point
 		var random_civil = civil_list[randi() % civil_list.size()]
+		
+		get_parent().staff_manager.disable_interaction_point(true)
 		
 		random_civil.move_to_interaction_point(target_point)

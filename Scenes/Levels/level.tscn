@@ -4372,14 +4372,22 @@ staff_interaction_points = [NodePath("../../Targets/Target_1"), NodePath("../../
 position = Vector2(-20, 33)
 script = ExtResource("11_r2j28")
 
-[node name="AICharacter" parent="AIManager/CivilianManager" instance=ExtResource("12_bcxm4")]
+[node name="AICharacter" parent="AIManager/CivilianManager" node_paths=PackedStringArray("current_target") instance=ExtResource("12_bcxm4")]
 position = Vector2(-79, 41)
+motion_mode = 1
+current_target = NodePath("../../../Targets/Target_1")
 
 [node name="AICharacter2" parent="AIManager/CivilianManager" instance=ExtResource("12_bcxm4")]
 position = Vector2(-101, 83)
+motion_mode = 1
+floor_stop_on_slope = false
+floor_constant_speed = true
 
 [node name="AICharacter3" parent="AIManager/CivilianManager" instance=ExtResource("12_bcxm4")]
 position = Vector2(-61, 135)
+motion_mode = 1
+floor_stop_on_slope = false
+floor_constant_speed = true
 
 [node name="GuardManager" type="Node2D" parent="AIManager"]
 script = ExtResource("14_ug8r0")
