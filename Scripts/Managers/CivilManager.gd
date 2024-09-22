@@ -7,10 +7,11 @@ class_name CivilManager
 var civil_list: Array[AICharacter] = []
 
 func _ready():
-	
 	for child in get_children():
 		if child is AICharacter:
 			civil_list.append(child)
+
+	self.connect("completed_action", Callable( self, "on_actor_completed_action"))
 
 func handle_civil_routines(): 
 	var available_staff_point = get_parent().staff_manager.get_available_interaction_points()
@@ -22,3 +23,6 @@ func handle_civil_routines():
 		get_parent().staff_manager.disable_interaction_point(true)
 		
 		random_civil.move_to_interaction_point(target_point)
+
+func on_actor_completed_action():
+	handle_civil_routines()
