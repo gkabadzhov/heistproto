@@ -38,6 +38,7 @@ func move_to_interaction_point(interaction_point: Node2D):
 		
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	if is_moving:
+		speed = 100
 #		print("my name is: ", self.name, 
 #					"with position: ", self.global_position,
 #					"/ in func _on_navigation_agent_2d_velocity_computed() ",
@@ -45,7 +46,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 #					"/ target position is: ",navigation_agent.target_position )
 		velocity = global_position.direction_to(navigation_agent.target_position) * speed
 		move_and_slide()
-	
+
 	
 	if is_active:
 		if global_position.distance_to(navigation_agent.target_position) < 5.0:
@@ -69,9 +70,12 @@ func return_to_starting_point():
 	is_moving = true
 
 func reset():
-	is_moving = false
-	current_target = null
-	completed_action.emit()
+	
+	if current_target != null:
+	
+		is_moving = false
+		current_target = null
+		completed_action.emit()
 
 func _on_navigation_agent_2d_target_reached():
 	#interaction_complete()
